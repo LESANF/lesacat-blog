@@ -15,6 +15,19 @@ export default function Comments() {
       console.log("Pathname:", window.location.pathname);
     }
 
+    // Giscus 메시지 리스너 추가 (실시간 업데이트)
+    const handleMessage = (event: MessageEvent) => {
+      if (event.origin !== "https://giscus.app") return;
+      if (event.data.giscus?.discussion) {
+        // Discussion이 생성되었을 때의 처리
+        console.log(
+          "Discussion created/updated:",
+          event.data.giscus.discussion
+        );
+      }
+    };
+    window.addEventListener("message", handleMessage);
+
     const scriptElem = document.createElement("script");
     scriptElem.src = "https://giscus.app/client.js";
     scriptElem.async = true;
@@ -27,12 +40,17 @@ export default function Comments() {
     scriptElem.setAttribute("data-mapping", "pathname");
     scriptElem.setAttribute("data-strict", "0");
     scriptElem.setAttribute("data-reactions-enabled", "1");
-    scriptElem.setAttribute("data-emit-metadata", "0");
+    scriptElem.setAttribute("data-emit-metadata", "1");
     scriptElem.setAttribute("data-input-position", "bottom");
     scriptElem.setAttribute("data-theme", "light");
     scriptElem.setAttribute("data-lang", "ko");
 
     ref.current.appendChild(scriptElem);
+
+    // cleanup 함수로 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
   }, []);
 
   return (
@@ -41,6 +59,9 @@ export default function Comments() {
         <h3 className="text-xl font-bold text-black mb-2">댓글</h3>
         <p className="text-sm text-gray-600">
           GitHub 계정으로 로그인하여 댓글을 남겨보세요
+        </p>
+        <p className="text-xs text-gray-500 mt-1">
+          ✨ 반응이나 댓글 작성 후 잠시 기다리시면 자동으로 업데이트됩니다
         </p>
       </div>
 

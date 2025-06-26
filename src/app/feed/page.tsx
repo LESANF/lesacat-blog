@@ -1,12 +1,28 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { posts } from "@/data/posts";
-import { Category } from "@/types/blog";
+import { useState, useEffect } from "react";
+import { Category, BlogPost } from "@/types/blog";
 
 export default function Feed() {
   const [activeCategories, setActiveCategories] = useState<Category[]>([]);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+
+  useEffect(() => {
+    // 클라이언트에서 포스트 데이터 로드
+    const loadPosts = async () => {
+      try {
+        const response = await fetch("/api/posts");
+        const postsData = await response.json();
+        setPosts(postsData);
+      } catch (error) {
+        console.error("Failed to load posts:", error);
+        setPosts([]);
+      }
+    };
+
+    loadPosts();
+  }, []);
 
   const toggleCategory = (category: Category) => {
     setActiveCategories((prev) =>

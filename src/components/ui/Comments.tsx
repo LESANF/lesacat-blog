@@ -57,12 +57,6 @@ export default function Comments() {
     <div className="comments-section">
       <div className="mb-6">
         <h3 className="text-xl font-bold text-black mb-2">댓글</h3>
-        <p className="text-sm text-gray-600">
-          GitHub 계정으로 로그인하여 댓글을 남겨보세요
-        </p>
-        <p className="text-xs text-gray-500 mt-1">
-          ✨ 반응이나 댓글 작성 후 잠시 기다리시면 자동으로 업데이트됩니다
-        </p>
       </div>
 
       <div className="giscus-wrapper">

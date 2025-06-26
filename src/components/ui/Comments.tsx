@@ -13,19 +13,11 @@ export default function Comments() {
     scriptElem.async = true;
     scriptElem.crossOrigin = "anonymous";
 
-    scriptElem.setAttribute("data-repo", process.env.NEXT_PUBLIC_GISCUS_REPO!);
-    scriptElem.setAttribute(
-      "data-repo-id",
-      process.env.NEXT_PUBLIC_GISCUS_REPO_ID!
-    );
-    scriptElem.setAttribute(
-      "data-category",
-      process.env.NEXT_PUBLIC_GISCUS_CATEGORY!
-    );
-    scriptElem.setAttribute(
-      "data-category-id",
-      process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID!
-    );
+    // 임시 하드코딩 테스트
+    scriptElem.setAttribute("data-repo", "LESANF/lesacat-blog");
+    scriptElem.setAttribute("data-repo-id", "R_kgDOPCU21w");
+    scriptElem.setAttribute("data-category", "Comments");
+    scriptElem.setAttribute("data-category-id", "DIC_kwDOPCU218M6OjM4Mzg0MzA");
     scriptElem.setAttribute("data-mapping", "pathname");
     scriptElem.setAttribute("data-strict", "0");
     scriptElem.setAttribute("data-reactions-enabled", "1");

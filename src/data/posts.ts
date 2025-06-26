@@ -5,7 +5,7 @@ export const posts: BlogPost[] = [
     id: "1",
     title: "Nirvana",
     date: "2025.03.24",
-    category: "LIFE",
+    category: "DAILY",
     slug: "nirvana",
     content: `# Nirvana
 
@@ -17,7 +17,7 @@ export const posts: BlogPost[] = [
     id: "2",
     title: "React로 인스타그램 필터 구현하기",
     date: "2024.04.26",
-    category: "DEV",
+    category: "STUDY",
     slug: "react-instagram-filter",
     content: `# React로 인스타그램 필터 구현하기
 
@@ -27,7 +27,7 @@ Canvas API와 React를 활용해서 인스타그램 스타일의 이미지 필�
     id: "3",
     title: "내가 Tailwind CSS를 사랑하는 이유",
     date: "2024.03.17",
-    category: "DEV",
+    category: "STUDY",
     slug: "why-i-love-tailwind-css",
     content: `# 내가 Tailwind CSS를 사랑하는 이유
 
@@ -35,13 +35,13 @@ Canvas API와 React를 활용해서 인스타그램 스타일의 이미지 필�
   },
   {
     id: "4",
-    title: "2달 동안 커피챗을 20번 해보았다",
+    title: "알고리즘 문제 해결: 투 포인터 테크닉",
     date: "2024.03.03",
-    category: "CAREER",
-    slug: "coffee-chat-experience",
-    content: `# 2달 동안 커피챗을 20번 해보았다
+    category: "DEV",
+    slug: "two-pointer-technique",
+    content: `# 알고리즘 문제 해결: 투 포인터 테크닉
 
-네트워킹의 중요성과 커피챗을 통해 얻은 소중한 경험들을 공유합니다.`,
+효율적인 배열 탐색을 위한 투 포인터 알고리즘에 대해 알아봅시다.`,
   },
   {
     id: "5",
@@ -57,7 +57,7 @@ Canvas API와 React를 활용해서 인스타그램 스타일의 이미지 필�
     id: "6",
     title: "열아홉인데요, 4년차 개발자가 되어버렸습니다",
     date: "2024.01.04",
-    category: "CAREER",
+    category: "DAILY",
     slug: "young-developer-story",
     content: `# 열아홉인데요, 4년차 개발자가 되어버렸습니다
 

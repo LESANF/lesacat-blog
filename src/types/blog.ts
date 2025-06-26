@@ -7,7 +7,7 @@ export interface BlogPost {
   slug: string;
 }
 
-export type Category = "LIFE" | "DEV" | "CAREER";
+export type Category = "DEV" | "DAILY" | "STUDY";
 
 export interface CategoryFilter {
   category: Category;

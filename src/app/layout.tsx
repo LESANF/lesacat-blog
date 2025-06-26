@@ -18,15 +18,49 @@ export const metadata: Metadata = {
     default: "Lesalog",
     template: "%s | Lesalog",
   },
-  description:
-    "개발자의 일상과 기술 이야기를 담은 블로그입니다. Next.js, React, 알고리즘 등 다양한 개발 경험을 공유합니다.",
+  description: "레사로그",
   keywords: [
     "개발 블로그",
     "프론트엔드",
+    "백엔드",
     "Next.js",
     "React",
+    "TypeScript",
+    "JavaScript",
+    "Node.js",
+    "웹 개발",
+    "소프트웨어 개발",
+    "프로그래밍",
     "개발자",
     "기술 블로그",
+    "코딩",
+    "알고리즘",
+    "자료구조",
+    "데이터베이스",
+    "API",
+    "REST API",
+    "GraphQL",
+    "Git",
+    "개발 도구",
+    "프레임워크",
+    "라이브러리",
+    "오픈소스",
+    "클린코드",
+    "리팩토링",
+    "테스트",
+    "배포",
+    "DevOps",
+    "AWS",
+    "Docker",
+    "Kubernetes",
+    "마이크로서비스",
+    "성능 최적화",
+    "보안",
+    "UX/UI",
+    "반응형 웹",
+    "PWA",
+    "모바일 앱",
+    "크로스 플랫폼",
   ],
   authors: [{ name: "Lesa" }],
   creator: "Lesa",
@@ -37,17 +71,82 @@ export const metadata: Metadata = {
     telephone: false,
   },
   metadataBase: new URL("https://your-domain.com"), // 실제 도메인으로 변경하세요
+  icons: {
+    icon: [
+      { url: "/favicons/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicons/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicons/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      {
+        url: "/favicons/apple-icon-57x57.png",
+        sizes: "57x57",
+        type: "image/png",
+      },
+      {
+        url: "/favicons/apple-icon-60x60.png",
+        sizes: "60x60",
+        type: "image/png",
+      },
+      {
+        url: "/favicons/apple-icon-72x72.png",
+        sizes: "72x72",
+        type: "image/png",
+      },
+      {
+        url: "/favicons/apple-icon-76x76.png",
+        sizes: "76x76",
+        type: "image/png",
+      },
+      {
+        url: "/favicons/apple-icon-114x114.png",
+        sizes: "114x114",
+        type: "image/png",
+      },
+      {
+        url: "/favicons/apple-icon-120x120.png",
+        sizes: "120x120",
+        type: "image/png",
+      },
+      {
+        url: "/favicons/apple-icon-144x144.png",
+        sizes: "144x144",
+        type: "image/png",
+      },
+      {
+        url: "/favicons/apple-icon-152x152.png",
+        sizes: "152x152",
+        type: "image/png",
+      },
+      {
+        url: "/favicons/apple-icon-180x180.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+  },
+  manifest: "/favicons/manifest.json",
   openGraph: {
     type: "website",
     locale: "ko_KR",
     title: "Lesalog",
-    description: "개발자의 일상과 기술 이야기를 담은 블로그입니다.",
+    description: "레사로그",
     siteName: "Lesalog",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Lesalog",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Lesalog",
-    description: "개발자의 일상과 기술 이야기를 담은 블로그입니다.",
+    description: "레사로그",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -66,6 +165,10 @@ export const metadata: Metadata = {
     //   'naver-site-verification': 'your-naver-verification', // 네이버 웹마스터 인증 시 추가
     // },
   },
+  other: {
+    "msapplication-TileColor": "#ffffff",
+    "msapplication-config": "/favicons/browserconfig.xml",
+  },
 };
 
 export default function RootLayout({
@@ -75,6 +178,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        <link rel="apple-touch-icon" href="/favicons/apple-icon.png" />
+        <link
+          rel="apple-touch-icon-precomposed"
+          href="/favicons/apple-icon-precomposed.png"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

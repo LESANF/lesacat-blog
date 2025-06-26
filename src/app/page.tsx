@@ -3,20 +3,19 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Lesalog - 개발자의 일상과 기술 이야기",
-  description:
-    "개발자의 일상과 기술 이야기를 담은 블로그입니다. Next.js, React, 알고리즘 등 다양한 개발 경험을 공유합니다.",
+  title: "Lesalog",
+  description: "레사로그",
   openGraph: {
-    title: "Lesalog - 개발자의 일상과 기술 이야기",
-    description:
-      "개발자의 일상과 기술 이야기를 담은 블로그입니다. Next.js, React, 알고리즘 등 다양한 개발 경험을 공유합니다.",
+    title: "Lesalog",
+    description: "레사로그",
     type: "website",
+    images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lesalog - 개발자의 일상과 기술 이야기",
-    description:
-      "개발자의 일상과 기술 이야기를 담은 블로그입니다. Next.js, React, 알고리즘 등 다양한 개발 경험을 공유합니다.",
+    title: "Lesalog",
+    description: "레사로그",
+    images: ["/og-image.png"],
   },
 };
 

@@ -13,10 +13,19 @@ export default function Comments() {
     scriptElem.async = true;
     scriptElem.crossOrigin = "anonymous";
 
-    scriptElem.setAttribute("data-repo", "LESANF/lesacat-blog");
-    scriptElem.setAttribute("data-repo-id", "R_kgDOPCU21w");
-    scriptElem.setAttribute("data-category", "General"); // 카테고리가 설정되면 변경하세요
-    scriptElem.setAttribute("data-category-id", "[ENTER CATEGORY ID HERE]"); // 실제 카테고리 ID로 변경하세요
+    scriptElem.setAttribute("data-repo", process.env.NEXT_PUBLIC_GISCUS_REPO!);
+    scriptElem.setAttribute(
+      "data-repo-id",
+      process.env.NEXT_PUBLIC_GISCUS_REPO_ID!
+    );
+    scriptElem.setAttribute(
+      "data-category",
+      process.env.NEXT_PUBLIC_GISCUS_CATEGORY!
+    );
+    scriptElem.setAttribute(
+      "data-category-id",
+      process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID!
+    );
     scriptElem.setAttribute("data-mapping", "pathname");
     scriptElem.setAttribute("data-strict", "0");
     scriptElem.setAttribute("data-reactions-enabled", "1");

@@ -1,20 +1,33 @@
 "use client";
 
-import Giscus from "@giscus/react";
+import { useEffect, useRef } from "react";
 
-interface CommentsProps {
-  repo: `${string}/${string}`;
-  repoId: string;
-  category: string;
-  categoryId: string;
-}
+export default function Comments() {
+  const ref = useRef<HTMLDivElement>(null);
 
-export default function Comments({
-  repo,
-  repoId,
-  category,
-  categoryId,
-}: CommentsProps) {
+  useEffect(() => {
+    if (!ref.current || ref.current.hasChildNodes()) return;
+
+    const scriptElem = document.createElement("script");
+    scriptElem.src = "https://giscus.app/client.js";
+    scriptElem.async = true;
+    scriptElem.crossOrigin = "anonymous";
+
+    scriptElem.setAttribute("data-repo", "LESANF/lesacat-blog");
+    scriptElem.setAttribute("data-repo-id", "R_kgDOPCU21w");
+    scriptElem.setAttribute("data-category", "General"); // 카테고리가 설정되면 변경하세요
+    scriptElem.setAttribute("data-category-id", "[ENTER CATEGORY ID HERE]"); // 실제 카테고리 ID로 변경하세요
+    scriptElem.setAttribute("data-mapping", "pathname");
+    scriptElem.setAttribute("data-strict", "0");
+    scriptElem.setAttribute("data-reactions-enabled", "1");
+    scriptElem.setAttribute("data-emit-metadata", "0");
+    scriptElem.setAttribute("data-input-position", "bottom");
+    scriptElem.setAttribute("data-theme", "light");
+    scriptElem.setAttribute("data-lang", "ko");
+
+    ref.current.appendChild(scriptElem);
+  }, []);
+
   return (
     <div className="comments-section">
       <div className="mb-6">
@@ -25,21 +38,7 @@ export default function Comments({
       </div>
 
       <div className="giscus-wrapper">
-        <Giscus
-          id="comments"
-          repo={repo}
-          repoId={repoId}
-          category={category}
-          categoryId={categoryId}
-          mapping="pathname"
-          term=""
-          reactionsEnabled="1"
-          emitMetadata="0"
-          inputPosition="top"
-          theme="light"
-          lang="ko"
-          loading="lazy"
-        />
+        <section ref={ref} />
       </div>
 
       <style jsx global>{`
@@ -165,6 +164,8 @@ export default function Comments({
         /* 로딩 상태 */
         .giscus-wrapper .gsc-loading {
           color: #666 !important;
+          padding: 20px !important;
+          text-align: center !important;
         }
 
         /* 에러 상태 */

@@ -115,12 +115,7 @@ export default function PostPage({ params }: PostPageProps) {
 
         {/* Comments Section */}
         <div className="border-t border-gray-200 pt-12 mb-8">
-          <Comments
-            repo="your-username/your-repo" // 실제 GitHub 레포로 변경하세요
-            repoId="R_your-repo-id" // 실제 레포 ID로 변경하세요
-            category="General" // 실제 카테고리로 변경하세요
-            categoryId="DIC_your-category-id" // 실제 카테고리 ID로 변경하세요
-          />
+          <Comments />
         </div>
 
         {/* Footer - 심플한 공유 링크 */}

@@ -5,6 +5,8 @@ export interface BlogPost {
   category: Category;
   content?: string;
   slug: string;
+  description?: string;
+  tags?: string[];
 }
 
 export type Category = "DEV" | "DAILY" | "STUDY";

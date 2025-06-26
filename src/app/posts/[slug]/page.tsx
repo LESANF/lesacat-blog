@@ -2,8 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { posts } from "@/data/posts";
-import Giscus from "@/components/ui/Giscus";
+import { getAllSlugs, getPostBySlug } from "@/lib/posts";
+import Comments from "@/components/ui/Comments";
+import { Metadata } from "next";
 
 interface PostPageProps {
   params: {
@@ -12,13 +13,45 @@ interface PostPageProps {
 }
 
 export async function generateStaticParams() {
-  return posts.map((post) => ({
-    slug: post.slug,
+  const slugs = getAllSlugs();
+  return slugs.map((slug) => ({
+    slug,
   }));
 }
 
+export async function generateMetadata({
+  params,
+}: PostPageProps): Promise<Metadata> {
+  const post = getPostBySlug(params.slug);
+
+  if (!post) {
+    return {
+      title: "Post Not Found",
+      description: "The requested post could not be found.",
+    };
+  }
+
+  return {
+    title: `${post.title} | Lesalog`,
+    description: post.description || post.content?.substring(0, 160) + "...",
+    keywords: post.tags?.join(", "),
+    openGraph: {
+      title: post.title,
+      description: post.description || post.content?.substring(0, 160) + "...",
+      type: "article",
+      publishedTime: post.date,
+      tags: post.tags,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description || post.content?.substring(0, 160) + "...",
+    },
+  };
+}
+
 export default function PostPage({ params }: PostPageProps) {
-  const post = posts.find((p) => p.slug === params.slug);
+  const post = getPostBySlug(params.slug);
 
   if (!post) {
     notFound();
@@ -39,7 +72,7 @@ export default function PostPage({ params }: PostPageProps) {
             href="/"
             className="text-lg font-medium text-black hover:underline decoration-2 underline-offset-4"
           >
-            / HOME
+            HOME
           </Link>
         </div>
 
@@ -49,9 +82,26 @@ export default function PostPage({ params }: PostPageProps) {
           <h1 className="text-3xl md:text-4xl font-bold text-black mb-4">
             {post.title}
           </h1>
-          <div className="inline-block px-3 py-1 border border-black text-sm">
-            {post.category}
+          <div className="flex items-center gap-2 mb-4">
+            <div className="inline-block px-3 py-1 border border-black text-sm">
+              {post.category}
+            </div>
+            {post.tags && post.tags.length > 0 && (
+              <div className="flex gap-1">
+                {post.tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="inline-block px-2 py-1 bg-gray-100 text-xs text-gray-700 rounded"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
+          {post.description && (
+            <p className="text-gray-700 leading-relaxed">{post.description}</p>
+          )}
         </div>
 
         {/* Post Content */}
@@ -64,59 +114,39 @@ export default function PostPage({ params }: PostPageProps) {
         </div>
 
         {/* Comments Section */}
-        <div className="border-t border-gray-200 pt-12">
-          <h3 className="text-xl font-bold text-black mb-6">반응 5개</h3>
+        <div className="border-t border-gray-200 pt-12 mb-8">
+          <Comments
+            repo="your-username/your-repo" // 실제 GitHub 레포로 변경하세요
+            repoId="R_your-repo-id" // 실제 레포 ID로 변경하세요
+            category="General" // 실제 카테고리로 변경하세요
+            categoryId="DIC_your-category-id" // 실제 카테고리 ID로 변경하세요
+          />
+        </div>
 
-          {/* Giscus Comments - 실제 사용시에는 본인의 GitHub 레포 정보로 변경하세요 */}
-          <div className="mb-8">
-            <Giscus
-              repo="your-username/your-repo" // 실제 GitHub 레포로 변경
-              repoId="R_your-repo-id" // 실제 레포 ID로 변경
-              category="General" // 실제 카테고리로 변경
-              categoryId="DIC_your-category-id" // 실제 카테고리 ID로 변경
-              mapping="pathname"
-              strict="0"
-              reactionsEnabled="1"
-              emitMetadata="0"
-              inputPosition="bottom"
-              theme="light"
-              lang="ko"
-            />
-          </div>
-
-          {/* Footer Info */}
-          <div className="border-t border-gray-200 pt-8">
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              <span>댓글 오픈</span>
-              <span>– Powered by</span>
+        {/* Footer - 심플한 공유 링크 */}
+        <div className="border-t border-gray-200 pt-8">
+          <div className="text-center text-gray-600">
+            <p className="mb-4">이 글이 도움이 되었다면 공유해주세요</p>
+            <div className="flex justify-center gap-4">
               <Link
-                href="https://giscus.app"
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                  post.title
+                )}&url=${encodeURIComponent(
+                  `https://your-domain.com/posts/${post.slug}`
+                )}`}
                 className="text-black hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                giscus
+                Twitter로 공유
               </Link>
-            </div>
-
-            <div className="mt-6 p-4 bg-white border border-gray-200 rounded">
-              <div className="flex justify-between items-center mb-2">
-                <button className="text-sm bg-gray-100 px-3 py-1 rounded">
-                  작성하기
-                </button>
-                <button className="text-sm bg-gray-100 px-3 py-1 rounded">
-                  미리보기
-                </button>
-              </div>
-              <textarea
-                className="w-full h-24 p-3 border border-gray-200 rounded resize-none text-sm"
-                placeholder="본고인하고 댓글 작성하기"
-              />
-              <div className="flex justify-end mt-2">
-                <button className="bg-green-600 text-white px-4 py-2 rounded text-sm hover:bg-green-700">
-                  GitHub으로 로그인
-                </button>
-              </div>
+              <span className="text-gray-400">·</span>
+              <Link
+                href="mailto:your-email@example.com"
+                className="text-black hover:underline"
+              >
+                이메일로 연락
+              </Link>
             </div>
           </div>
         </div>

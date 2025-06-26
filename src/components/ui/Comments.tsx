@@ -8,6 +8,13 @@ export default function Comments() {
   useEffect(() => {
     if (!ref.current || ref.current.hasChildNodes()) return;
 
+    // 로컬 개발 환경에서는 로그만 출력
+    if (process.env.NODE_ENV === "development") {
+      console.log("Giscus - Development mode detected");
+      console.log("Current URL:", window.location.href);
+      console.log("Pathname:", window.location.pathname);
+    }
+
     const scriptElem = document.createElement("script");
     scriptElem.src = "https://giscus.app/client.js";
     scriptElem.async = true;

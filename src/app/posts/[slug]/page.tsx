@@ -87,11 +87,11 @@ export default function PostPage({ params }: PostPageProps) {
           </h1>
           <div className="flex items-center gap-2 mb-4">
             {post.tags && post.tags.length > 0 && (
-              <div className="flex gap-1">
+              <div className="flex flex-wrap gap-1">
                 {post.tags.map((tag, index) => (
                   <span
                     key={index}
-                    className="inline-block px-2 py-1 bg-gray-100 text-xs text-gray-700 rounded"
+                    className="inline-block px-2 py-1 bg-gray-100 text-xs text-gray-700 rounded whitespace-nowrap"
                   >
                     #{tag}
                   </span>

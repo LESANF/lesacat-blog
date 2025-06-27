@@ -53,6 +53,22 @@ export default function Home() {
             >
               Portfolio
             </Link>
+            <Link
+              href="https://github.com/LESANF"
+              className="block text-lg font-medium text-black hover:underline decoration-2 underline-offset-4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </Link>
+            <Link
+              href="https://www.linkedin.com/in/lesacat"
+              className="block text-lg font-medium text-black hover:underline decoration-2 underline-offset-4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn
+            </Link>
           </div>
         </div>
       </div>

@@ -2,6 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { getAllSlugs, getPostBySlug } from "@/lib/posts";
 import Comments from "@/components/ui/Comments";
 import { Metadata } from "next";
@@ -83,9 +86,6 @@ export default function PostPage({ params }: PostPageProps) {
             {post.title}
           </h1>
           <div className="flex items-center gap-2 mb-4">
-            <div className="inline-block px-3 py-1 border border-black text-sm">
-              {post.category}
-            </div>
             {post.tags && post.tags.length > 0 && (
               <div className="flex gap-1">
                 {post.tags.map((tag, index) => (
@@ -99,15 +99,66 @@ export default function PostPage({ params }: PostPageProps) {
               </div>
             )}
           </div>
-          {post.description && (
-            <p className="text-gray-700 leading-relaxed">{post.description}</p>
-          )}
         </div>
 
         {/* Post Content */}
         <div className="prose prose-lg max-w-none mb-16">
           <div className="text-gray-800 leading-relaxed">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw]}
+              components={{
+                code(props) {
+                  const { children, className } = props;
+                  const match = /language-(\w+)/.exec(className || "");
+                  return match ? (
+                    <SyntaxHighlighter
+                      PreTag="div"
+                      language={match[1]}
+                      style={oneLight}
+                      customStyle={{
+                        margin: 0,
+                        padding: "16px",
+                        fontSize: "14px",
+                        lineHeight: "1.5",
+                        backgroundColor: "#fafafa",
+                        border: "none",
+                        borderRadius: "6px",
+                      }}
+                    >
+                      {String(children).replace(/\n$/, "")}
+                    </SyntaxHighlighter>
+                  ) : (
+                    <code className="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono">
+                      {children}
+                    </code>
+                  );
+                },
+                a(props) {
+                  const { href, children } = props;
+                  if (
+                    href &&
+                    (href.startsWith("http") || href.startsWith("https"))
+                  ) {
+                    return (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:underline"
+                      >
+                        {children}
+                      </a>
+                    );
+                  }
+                  return (
+                    <a href={href} className="text-blue-600 hover:underline">
+                      {children}
+                    </a>
+                  );
+                },
+              }}
+            >
               {post.content || ""}
             </ReactMarkdown>
           </div>

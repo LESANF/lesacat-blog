@@ -157,6 +157,17 @@ export default function PostPage({ params }: PostPageProps) {
                     </a>
                   );
                 },
+                img(props) {
+                  const { src, alt } = props;
+                  return (
+                    <img
+                      src={src}
+                      alt={alt}
+                      className="max-w-full h-auto rounded-lg my-4 mx-auto block"
+                      loading="lazy"
+                    />
+                  );
+                },
               }}
             >
               {post.content || ""}

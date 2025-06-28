@@ -179,34 +179,6 @@ export default function PostPage({ params }: PostPageProps) {
         <div className="border-t border-gray-200 pt-12 mb-8">
           <Comments />
         </div>
-
-        {/* Footer - 심플한 공유 링크 */}
-        <div className="border-t border-gray-200 pt-8">
-          <div className="text-center text-gray-600">
-            <p className="mb-4">이 글이 도움이 되었다면 공유해주세요</p>
-            <div className="flex justify-center gap-4">
-              <Link
-                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                  post.title
-                )}&url=${encodeURIComponent(
-                  `https://your-domain.com/posts/${post.slug}`
-                )}`}
-                className="text-black hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Twitter로 공유
-              </Link>
-              <span className="text-gray-400">·</span>
-              <Link
-                href="mailto:your-email@example.com"
-                className="text-black hover:underline"
-              >
-                이메일로 연락
-              </Link>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

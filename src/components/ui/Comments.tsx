@@ -19,11 +19,6 @@ export default function Comments() {
     const handleMessage = (event: MessageEvent) => {
       if (event.origin !== "https://giscus.app") return;
       if (event.data.giscus?.discussion) {
-        // Discussion이 생성되었을 때의 처리
-        console.log(
-          "Discussion created/updated:",
-          event.data.giscus.discussion
-        );
       }
     };
     window.addEventListener("message", handleMessage);

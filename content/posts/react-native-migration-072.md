@@ -6,6 +6,11 @@ tags: ["React Native", "마이그레이션", "업데이트", "버전업", "레�
 category: "DEV"
 ---
 
+<img src="../images/gif/react-native-migration/reborn.gif" alt="이주" style="width: 100%; max-width: 300px; border: 1px solid #ddd; border-radius: 8px;" />
+
+</br>
+</br>
+
 회사에 입사하고 프로젝트를 살펴보니 React Native 버전이 0.70.5였다. 처음 회의에서 "React Native 버전이 너무 오래된 것 같은데 업데이트를 고려해보면 어떨까요?"라고 말을 꺼냈지만, "일정이 빠듯하니 지금은 돌아가니까 그냥 두자"는 결론이 났다.
 
 하지만 결국 피할 수 없는 순간이 왔다.

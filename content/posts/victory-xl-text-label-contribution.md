@@ -6,7 +6,12 @@ tags: ["React Native", "victory-native-xl", "오픈소스", "차트", "컨트리
 category: "DEV"
 ---
 
-고객사에서 "차트 막대 위에 수치를 표시해달라"는 요청이 들어왔다. 언뜻 간단해 보이는 요구사항이었지만, 우리가 사용 중인 [victory-native-xl](https://github.com/FormidableLabs/victory-native-xl) 라이브러리에는 막대 차트 위에 텍스트를 표시하는 기능이 없었다.
+<img src="../images/victory-xl-contributer/hardwork.gif" alt="과로" style="width: 100%; max-width: 300px; border: 1px solid #ddd; border-radius: 8px;" />
+
+</br>
+</br>
+
+급하게 고객사에서 "차트 막대 위에 수치를 표시해달라"는 요청이 들어왔다. 언뜻 간단해 보이는 요구사항이었지만, 우리가 사용 중인 [victory-native-xl](https://github.com/FormidableLabs/victory-native-xl) 라이브러리에는 막대 차트 위에 텍스트를 표시하는 기능이 없었다.
 
 기존 메인 차트 라이브러리로는 고객사가 원하는 플렉시블한 차트 인터랙션을 구현할 수 없어서 victory-native-xl을 도입했는데, 정작 가장 기본적인 텍스트 표시 기능이 빠져있었던 것이다.
 

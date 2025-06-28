@@ -1,6 +1,6 @@
 ---
 title: "ReactNative 안드로이드 만보기 네이티브로 만들어보기"
-date: "2024.12.30"
+date: "2023-09-20"
 description: "고객사의 요구사항으로 시작된 React Native 안드로이드 네이티브 만보기 서비스 개발 과정과 실무에서 마주한 이슈들"
 tags: ["React Native", "Android", "네이티브 모듈", "만보기", "걸음수"]
 category: "DEV"

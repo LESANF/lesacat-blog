@@ -29,7 +29,7 @@ victory-native-xl로 멋진 인터랙티브 차트는 만들 수 있었지만, �
 
 ## 라이브러리 내부 구조 분석
 
-문제를 해결하기 위해 victory-native-xl의 내부 구조를 분석하기 시작했다. @shopify/react-native-skia를 기반으로 한 고성능 렌더링이 핵심이었고, Bar 컴포넌트는 다음과 같은 구조였다:
+문제를 해결하기 위해 victory-native-xl의 내부 구조를 분석하기 시작했다. @shopify/react-native-skia를 기반으로 한 고성능 렌더링이 핵심이었고, Bar 컴포넌트는 다음과 같은 구조였다.
 
 ```jsx
 // 기존 Bar 컴포넌트 구조
@@ -48,7 +48,7 @@ export const Bar = ({ points, chartBounds, innerPadding, ... }) => {
 
 ### 1단계: useBarPath 훅 수정
 
-먼저 각 막대의 위치 정보를 추가로 반환하도록 useBarPath 훅을 수정했다:
+먼저 각 막대의 위치 정보를 추가로 반환하도록 useBarPath 훅을 수정했다.
 
 - 기존: 막대를 그리는 path 정보만 반환
 - 개선: 각 막대의 x, y 좌표 정보를 추가로 수집해서 반환
@@ -97,7 +97,7 @@ export const useBarPath = (points, chartBounds, innerPadding, ...) => {
 
 ### 2단계: Bar 컴포넌트에 텍스트 렌더링 로직 추가
 
-위치 정보를 받아서 텍스트를 렌더링하는 로직을 Bar 컴포넌트에 추가했다:
+위치 정보를 받아서 텍스트를 렌더링하는 로직을 Bar 컴포넌트에 추가했다.
 
 - 막대 위치 정보를 활용해 텍스트 배치 좌표 계산
 - children으로 받은 텍스트 컴포넌트에 좌표 정보 전달
@@ -153,7 +153,7 @@ export const Bar = ({
 
 ### 3단계: 사용법 구현
 
-이제 다음과 같이 막대 차트 위에 텍스트를 표시할 수 있게 되었다:
+이제 다음과 같이 막대 차트 위에 텍스트를 표시할 수 있게 되었다.
 
 - Bar 컴포넌트 children으로 SkiaText 전달
 - 각 데이터 포인트마다 텍스트 생성
@@ -195,7 +195,7 @@ export const Bar = ({
 
 이슈를 등록한 후 커뮤니티에서 긍정적인 반응을 얻었다. 다른 개발자들도 비슷한 기능이 필요했다는 댓글들이 달렸고, 라이브러리 메인테이너들도 관심을 보였다.
 
-특히 라이브러리 개발사에서 직접 감사 인사와 함께 향후 공식 예제로 추가하고 싶다는 의견을 주었다:
+특히 라이브러리 개발사에서 직접 감사 인사와 함께 향후 공식 예제로 추가하고 싶다는 의견을 주었다.
 
 <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin: 20px 0;">
   <div style="flex: 1; min-width: 280px;">

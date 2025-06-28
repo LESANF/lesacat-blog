@@ -6,6 +6,11 @@ tags: ["iOS", "React Native", "문제해결", "장애대응", "오픈소스", "�
 category: "DEV"
 ---
 
+<img src="../images/gif/ios17-camera-crash-fix/nervous.gif" alt="초조" style="width: 100%; max-width: 300px; border: 1px solid #ddd; border-radius: 8px;" />
+
+</br>
+</br>
+
 월요일 아침, 고객사 대응팀에서 연락이 왔다. 아이폰 유저들이 갑자기 식단을 기록하기 위해 촬영을 했는데 사진 촬영 버튼을 눌러도 응답이 없다는 이슈가 다발적으로 들어왔다는 것이었다.
 
 "어제까지 잘 됐는데요?"라는 말이 계속 반복되는 걸 보니 뭔가 큰 변화가 있었던 것 같았다.
@@ -48,7 +53,7 @@ iOS 17에서는 카메라 버튼을 눌러도 아예 반응이없는 상황이�
 
 기본 카메라로 급한 불은 껐지만, 여전히 아쉬웠다. react-native-vision-camera의 성능과 기능이 훨씬 좋았기 때문이다.
 
-계속 Github 이슈를 모니터링하던 중, iOS 17에서 발생하는 구체적인 에러를 확인할 수 있었다:
+계속 Github 이슈를 모니터링하던 중, iOS 17에서 발생하는 구체적인 에러를 확인할 수 있었다.
 
 ```bash
 Error Domain=AVFoundationErrorDomain Code=-11800
@@ -66,7 +71,7 @@ UserInfo={
 
 이 문제는 **iOS 17 이상**에서만 발생했다. iOS 16에서는 정상 작동했다. 라이브러리 메인테이너가 [Apple Developer Forum](https://developer.apple.com/forums/thread/717565)의 사례를 언급하며 "이건 애플 자체 버그일 가능성도 있다"고 했다. iOS 17 출시 직후라 애플의 AVFoundation 프레임워크에 변경사항이 있었을 가능성이 높았다.
 
-실제로 다음과 같은 간단한 코드에서도 무반응이 발생했다:
+실제로 다음과 같은 간단한 코드에서도 무반응이 발생했다.
 
 ```javascript
 const device = useCameraDevice("back");
@@ -87,7 +92,7 @@ try {
 }
 ```
 
-이슈의 정보를 참고해서 네이티브 카메라 설정을 조정해보니 react-native-vision-camera가 iOS 17에서도 작동했다:
+이슈의 정보를 참고해서 네이티브 카메라 설정을 조정해보니 react-native-vision-camera가 iOS 17에서도 작동했다.
 
 ```swift
 // 카메라 성능 우선순위 변경으로 iOS 17에서 react-native-vision-camera 임시 사용

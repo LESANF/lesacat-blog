@@ -31,7 +31,7 @@ GitHub Discussions를 기반으로 한 댓글 시스템을 설정하는 방법�
 
 ## 4. 카테고리 ID 확인 및 적용
 
-giscus.app에서 카테고리를 선택하면 다음과 같은 설정이 생성됩니다:
+giscus.app에서 카테고리를 선택하면 다음과 같은 설정이 생성됩니다.
 
 ```html
 <script
@@ -78,7 +78,7 @@ scriptElem.setAttribute("data-category-id", "DIC_kwDOPCU21xxxxx"); // 실제 카
 
 ## 7. 스타일링
 
-댓글 디자인은 블로그의 종이질감 테마에 맞게 커스터마이징되어 있습니다:
+댓글 디자인은 블로그의 종이질감 테마에 맞게 커스터마이징되어 있습니다.
 
 - 검은색 테두리와 직각 모서리
 - GowunDodum 폰트 적용

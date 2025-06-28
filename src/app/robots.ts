@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/"],
     },
-    sitemap: "https://lesacat.me/sitemap.xml",
+    sitemap: "https://www.lesacat.me/sitemap.xml",
   };
 }

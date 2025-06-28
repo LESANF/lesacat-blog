@@ -6,13 +6,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticPages = [
     {
-      url: "https://lesacat.me",
+      url: "https://www.lesacat.me",
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 1,
     },
     {
-      url: "https://lesacat.me/feed",
+      url: "https://www.lesacat.me/feed",
       lastModified: new Date(),
       changeFrequency: "daily" as const,
       priority: 0.8,
@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const postPages = posts.map((post) => ({
-    url: `https://lesacat.me/posts/${post.slug}`,
+    url: `https://www.lesacat.me/posts/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: "monthly" as const,
     priority: 0.6,

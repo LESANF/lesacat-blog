@@ -12,10 +12,10 @@ const nextConfig = {
   // 정적 파일 최적화
   poweredByHeader: false,
 
-  // 실험적 기능
-  experimental: {
-    optimizeCss: true,
-  },
+  // 실험적 기능 (일단 비활성화)
+  // experimental: {
+  //   optimizeCss: true,
+  // },
 
   // 리다이렉트 최적화
   async headers() {

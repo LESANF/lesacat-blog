@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { siteConfig } from "@/config/site";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -15,10 +16,10 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: {
-    default: "Lesalog",
-    template: "%s | Lesalog",
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
   },
-  description: "레사로그",
+  description: siteConfig.description,
   keywords: [
     "개발 블로그",
     "프론트엔드",
@@ -70,7 +71,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://www.lesacat.me"),
+  metadataBase: new URL(siteConfig.url),
   icons: {
     icon: [
       { url: "/favicons/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -130,9 +131,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    title: "Lesalog",
-    description: "레사로그",
-    siteName: "Lesalog",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
     images: [
       {
         url: "/og-image.png",
@@ -144,8 +145,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lesalog",
-    description: "레사로그",
+    title: siteConfig.name,
+    description: siteConfig.description,
     images: ["/og-image.png"],
   },
   robots: {
@@ -159,12 +160,7 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    // google: 'your-google-site-verification', // Google Search Console 인증 시 추가
-    // other: {
-    //   'naver-site-verification': 'your-naver-verification', // 네이버 웹마스터 인증 시 추가
-    // },
-  },
+  verification: siteConfig.verification,
   other: {
     "msapplication-TileColor": "#ffffff",
     "msapplication-config": "/favicons/browserconfig.xml",

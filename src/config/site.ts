@@ -5,7 +5,7 @@ export const siteConfig = {
 
   // SEO 관련 설정
   verification: {
-    google: "googlefd0a4da418a10147",
+    google: "q4ip9TJjgaiBAxHjDyJhkVFVjuBsyJpe1aCXutGsgiY",
     // naver: "", // 네이버 웹마스터 인증 시 추가
   },
 

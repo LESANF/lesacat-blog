@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://your-domain.com"), // 실제 도메인으로 변경하세요
+  metadataBase: new URL("https://www.lesacat.me"),
   icons: {
     icon: [
       { url: "/favicons/favicon-16x16.png", sizes: "16x16", type: "image/png" },

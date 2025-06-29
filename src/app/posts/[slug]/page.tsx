@@ -7,6 +7,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { getAllSlugs, getPostBySlug } from "@/lib/posts";
 import Comments from "@/components/ui/Comments";
+import { BlogPostStructuredData } from "@/components/ui/StructuredData";
 import { Metadata } from "next";
 
 interface PostPageProps {
@@ -62,6 +63,17 @@ export default function PostPage({ params }: PostPageProps) {
 
   return (
     <div className="min-h-screen">
+      <BlogPostStructuredData
+        title={post.title}
+        description={
+          post.description || post.content?.substring(0, 160) + "..."
+        }
+        datePublished={post.date}
+        author="Lesa"
+        url={`https://www.lesacat.me/posts/${post.slug}`}
+        imageUrl="https://www.lesacat.me/og-image.png"
+        tags={post.tags}
+      />
       <div className="max-w-3xl mx-auto p-8">
         {/* Header */}
         <div className="flex justify-between items-center mb-12">

@@ -1,20 +1,24 @@
 import Monster from "@/components/ui/Monster";
+import { WebsiteStructuredData } from "@/components/ui/StructuredData";
 import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Lesalog",
-  description: "레사로그",
+  description:
+    "프론트엔드 개발자 레사의 기술 블로그. React, Next.js, TypeScript, JavaScript 개발 경험과 일상을 공유합니다.",
   openGraph: {
     title: "Lesalog",
-    description: "레사로그",
+    description:
+      "프론트엔드 개발자 레사의 기술 블로그. React, Next.js, TypeScript, JavaScript 개발 경험과 일상을 공유합니다.",
     type: "website",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Lesalog",
-    description: "레사로그",
+    description:
+      "프론트엔드 개발자 레사의 기술 블로그. React, Next.js, TypeScript, JavaScript 개발 경험과 일상을 공유합니다.",
     images: ["/og-image.png"],
   },
 };
@@ -22,6 +26,11 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
+      <WebsiteStructuredData
+        name="Lesalog"
+        url="https://www.lesacat.me"
+        description="레사로그"
+      />
       <div className="min-h-screen p-8 flex flex-col items-start justify-between max-w-4xl mx-auto">
         {/* Header */}
         <div className="w-full flex justify-between items-start pt-32">

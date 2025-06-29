@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.lesacat.me
+
+# Sitemaps
+Sitemap: https://www.lesacat.me/sitemap.xml

@@ -160,7 +160,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: siteConfig.verification,
   other: {
     "msapplication-TileColor": "#ffffff",
     "msapplication-config": "/favicons/browserconfig.xml",
@@ -179,6 +178,10 @@ export default function RootLayout({
         <link
           rel="apple-touch-icon-precomposed"
           href="/favicons/apple-icon-precomposed.png"
+        />
+        <meta
+          name="google-site-verification"
+          content="q4ip9TJjgaiBAxHjDyJhkVFVjuBsyJpe1aCXutGsgiY"
         />
       </head>
       <body

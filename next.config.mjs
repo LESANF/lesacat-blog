@@ -1,4 +1,10 @@
 /** @type {import('next').NextConfig} */
+import bundleAnalyzer from "@next/bundle-analyzer";
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
+
 const nextConfig = {
   // SEO 최적화 설정
   images: {
@@ -41,4 +47,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);

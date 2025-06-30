@@ -5,20 +5,17 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Lesalog",
-  description:
-    "프론트엔드 개발자 레사의 기술 블로그. React, Next.js, TypeScript, JavaScript 개발 경험과 일상을 공유합니다.",
+  description: "레사로그",
   openGraph: {
     title: "Lesalog",
-    description:
-      "프론트엔드 개발자 레사의 기술 블로그. React, Next.js, TypeScript, JavaScript 개발 경험과 일상을 공유합니다.",
+    description: "레사로그",
     type: "website",
     images: ["/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Lesalog",
-    description:
-      "프론트엔드 개발자 레사의 기술 블로그. React, Next.js, TypeScript, JavaScript 개발 경험과 일상을 공유합니다.",
+    description: "레사로그",
     images: ["/og-image.png"],
   },
 };

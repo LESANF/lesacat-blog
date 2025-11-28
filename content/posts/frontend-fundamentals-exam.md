@@ -1,7 +1,7 @@
 ---
 title: "이 나이에 모의고사...?"
 date: "2025-11-28"
-description: "iOS 17 출시 후 발생한 카메라 크래시 문제를 오픈소스 커뮤니티와 함께 해결한 과정과 향후 iOS 업데이트 대응 전략"
+description: "제 1회 Toss Frontend Fundamental 모의고사 응시 후기"
 tags: ["frontend", "toss", "fundamentals", "frontend-fundamental", "모의고사"]
 category: "DEV"
 ---
@@ -95,4 +95,82 @@ const handleBottomSheetDissmiss = () => {
 
 아래 이미지 처럼 코드에서 텍스트는 매우 중요한 구분자인것같다. 그 외에도 예시는 간단하지만 `useView`같은 상태를 관리하는 훅들도 미리 생각해보면 좋을 것 같다.
 
+간단하게 생각하면 화면과 코드의 1:1매칭이지만 이러한 수준까지 구현하기에는 많은 경험이 필요한 느낌이든다.
+
 <img alt="image" src="../images/code-one-on-one.png" />
+
+복잡한 화면이면 위의 예시처럼 직관적으로 표현하기 힘들것이다. 여기서 개발자의 센스나 숙련도가 드러나는느낌이다.
+
+주제가 커질수록 해당 주제에대한 관심사를 세분화하여 그룹을 잘짜야할 것 같다. 마치 지도를 구현할 때 클러스터 기능을 사용하는 것처럼
+
+아래는 내가 자주 사용하며 평소 많은 레퍼런스를 참고하는 [MJ님](https://github.com/mym0404)의 `react-native-naver-map` 클러스터 예시화면이다.
+
+  <img src="../images/gif/frontend-fundamental/naver-map-cluster.gif" alt="cluster" />
+
+이렇게 확대, 축소할 때 처럼 코드역시 역할별로 잘 그룹화 시켜야겠다고 생각했다.
+
+다음으로 중요하다 생각한건 바로
+
+## 합성으로 Props Drilling 풀어내기
+
+보통 부모 자식관계가 형성될 때, 사용하지않는 props도 전달되는 경우가있다.
+
+이러한 부분들이 엉키고 엉켜서 흔히 말하는 `Props Drilling`의 문제점이라는 주제로 화두에 오르는데
+
+나는 데이터 기준으로 역할과 책임을 가지는 컴포넌트에 한해서 Props를 계속하여 내려받는건 문제없다고 생각한다.
+
+해설에서 해당 문제에대하여 깊게 다루진 않았지만, 합성으로 잘 풀어나가면된다는 말이 인상깊어 정리를 해보려한다.
+
+`Component A -> Component B -> Component C` 라는 구조를 가지고있고 C가 A에서 값을 전달받아 사용하려면, 해당 값은 B를 거쳐오는 구조이다.
+
+이러한 구조가 겹치고 사용하지않는 props를 받는 컴포넌트가 늘어나며 문제가 생기는 구조이다.
+
+이를 합성으로 풀어보려면 아래와같이 풀어볼 수 있다.
+
+아래구조는 단순하지만 합성으로 풀기위한 초석이되는 구조이다. A -> B -> C 구조는 유지되지만
+
+B는 합성을 통해 `children`을 감싸는 역할만 한다.
+
+평소 `Context + 컴파운드 컴포넌트`형태로 풀던 구조를 단순하게 가져갈 수 있으면 좋겠다는 생각이 들었다.
+
+```jsx
+// A: 데이터를 가진 상위
+function A() {
+  const user = { name: "백준 프로그래머스(김동한)", tier: "Gold" };
+  return (
+    <B>
+      <C user={user} />
+    </B>
+  );
+}
+
+// B: 레이아웃/스타일 책임, 데이터 모름
+function B({ children }: { children: React.ReactNode }) {
+  return <div className="card">{children}</div>;
+}
+
+// C: 실제로 데이터 사용하는 곳
+function C({ user }: { user: { name: string, tier: string } }) {
+  return (
+    <p>
+      {user.name} / {user.tier}
+    </p>
+  );
+}
+```
+
+## 후기를 마치며
+
+일단 여기까지 해설 방송에대한 나의 후기인데, 두시간 조금 안되게 진행되었지만 지루하지않았다.
+
+생각보다 놓치고 있는게 많았고, 채용 과제에서 뭐가 중요한지 조금 힌트를 얻었다.
+
+여담으로 `FSD`, `Props Drilling`에 대한 질문이 들어올 때 할 말은 많은데 하지 않는 상황이 조금 재밌었다.
+
+요즘 같이 AI가 다해주는 세상에 이런 세심한 테크닉을 학습시키면 더 완벽한 코드가 나오지 않을까?
+
+올해 토스의 과제를 두번 째 풀어보는데, 앞서 ReactNative 코어 과제에서 떨어진게 내심 아쉽다.
+
+토스의 과제는 다른 채용과제보다 항상 재밌고, 요구사항이 명확해서 좋다. 과제자체에 대하여 고민하지않아도된다.
+
+좋은 경험이었다.

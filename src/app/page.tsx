@@ -10,13 +10,13 @@ export const metadata: Metadata = {
     title: "Lesalog",
     description: "레사로그",
     type: "website",
-    images: ["/og-image.png"],
+    images: ["/images/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Lesalog",
     description: "레사로그",
-    images: ["/og-image.png"],
+    images: ["/images/og-image.png"],
   },
 };
 

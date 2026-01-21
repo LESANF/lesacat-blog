@@ -136,7 +136,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: "/og-image.png",
+        url: "/images/og-image.png",
         width: 1200,
         height: 630,
         alt: "Lesalog",
@@ -147,7 +147,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: ["/og-image.png"],
+    images: ["/images/og-image.png"],
   },
   robots: {
     index: true,

@@ -47,4 +47,4 @@ category: "DAILY"
 다음 회사는 자사 서비스를 운영하는 회사를 목표로 하고 있습니다.
 바쁘시겠지만 한 번씩 포트폴리오 구경해주시면 감사하겠습니다!
 
-➡️ https://www.lesacat.site/
+➡️ https://www.lesacat.com/

@@ -13,6 +13,6 @@ export const siteConfig = {
   links: {
     github: "https://github.com/LESANF",
     linkedin: "https://www.linkedin.com/in/lesacat",
-    portfolio: "https://lesacat.site",
+    portfolio: "https://lesacat.com",
   },
 };

@@ -52,7 +52,7 @@ export default function Home() {
               Resume
             </Link>
             <Link
-              href="https://lesacat.site"
+              href="https://lesacat.com"
               className="block text-lg font-medium text-black hover:underline decoration-2 underline-offset-4"
               target="_blank"
               rel="noopener noreferrer"

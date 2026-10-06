@@ -82,7 +82,7 @@ export default async function PostPage({ params }: PostPageProps) {
   )?.[1];
 
   return (
-    <div className="min-h-screen">
+    <div className="post-page min-h-screen">
       <CodeBlockAssets />
       <BlogPostStructuredData
         title={post.title}

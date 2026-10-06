@@ -7,11 +7,20 @@ const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
+  preload: false,
 });
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+  preload: false,
+});
+
+const gowunDodum = localFont({
+  src: "./fonts/GowunDodum-Regular.woff2",
+  variable: "--font-gowun-dodum",
+  weight: "400",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -185,7 +194,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${gowunDodum.variable} antialiased`}
       >
         {children}
       </body>

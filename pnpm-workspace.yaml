@@ -1,0 +1,4 @@
+allowBuilds:
+  unrs-resolver: true
+overrides:
+  '@expressive-code/core>postcss-nested': 7.0.2

@@ -3,18 +3,32 @@ import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
 import { getAllSlugs, getPostBySlug } from "@/lib/posts";
 import Comments from "@/components/ui/Comments";
+import PostImage from "@/components/ui/PostImage";
+import { CodeBlockAssets, MarkdownCodeBlock } from "@/components/ui/CodeBlock";
 import { BlogPostStructuredData } from "@/components/ui/StructuredData";
 import { Metadata } from "next";
 
+const articleSchema = {
+  ...defaultSchema,
+  attributes: {
+    ...defaultSchema.attributes,
+    // Inline presentation is authored locally; scripts and event handlers stay blocked.
+    img: [...(defaultSchema.attributes?.img || []), "style"],
+    div: [...(defaultSchema.attributes?.div || []), "style"],
+    span: [...(defaultSchema.attributes?.span || []), "style"],
+  },
+};
+
 interface PostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
+
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const slugs = getAllSlugs();
@@ -26,7 +40,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: PostPageProps): Promise<Metadata> {
-  const post = getPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
   if (!post) {
     return {
@@ -36,7 +51,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${post.title} | Lesalog`,
+    title: post.title,
     description: post.description || post.content?.substring(0, 160) + "...",
     keywords: post.tags?.join(", "),
     openGraph: {
@@ -54,15 +69,21 @@ export async function generateMetadata({
   };
 }
 
-export default function PostPage({ params }: PostPageProps) {
-  const post = getPostBySlug(params.slug);
+export default async function PostPage({ params }: PostPageProps) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
+  const firstImageSrc = /<img\b[^>]*\bsrc=["']([^"']+)/i.exec(
+    post.content || "",
+  )?.[1];
+
   return (
     <div className="min-h-screen">
+      <CodeBlockAssets />
       <BlogPostStructuredData
         title={post.title}
         description={
@@ -71,7 +92,7 @@ export default function PostPage({ params }: PostPageProps) {
         datePublished={post.date}
         author="Lesa"
         url={`https://www.lesacat.me/posts/${post.slug}`}
-        imageUrl="https://www.lesacat.me/og-image.png"
+        imageUrl="https://www.lesacat.me/images/og-image.png"
         tags={post.tags}
       />
       <div className="max-w-3xl mx-auto p-8">
@@ -100,9 +121,9 @@ export default function PostPage({ params }: PostPageProps) {
           <div className="flex items-center gap-2 mb-4">
             {post.tags && post.tags.length > 0 && (
               <div className="flex flex-wrap gap-1">
-                {post.tags.map((tag, index) => (
+                {post.tags.map((tag) => (
                   <span
-                    key={index}
+                    key={tag}
                     className="inline-block px-2 py-1 bg-gray-100 text-xs text-gray-700 rounded whitespace-nowrap"
                   >
                     #{tag}
@@ -118,34 +139,9 @@ export default function PostPage({ params }: PostPageProps) {
           <div className="text-gray-800 leading-relaxed">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeRaw]}
+              rehypePlugins={[rehypeRaw, [rehypeSanitize, articleSchema]]}
               components={{
-                code(props) {
-                  const { children, className } = props;
-                  const match = /language-(\w+)/.exec(className || "");
-                  return match ? (
-                    <SyntaxHighlighter
-                      PreTag="div"
-                      language={match[1]}
-                      style={oneLight}
-                      customStyle={{
-                        margin: 0,
-                        padding: "16px",
-                        fontSize: "14px",
-                        lineHeight: "1.5",
-                        backgroundColor: "#fafafa",
-                        border: "none",
-                        borderRadius: "6px",
-                      }}
-                    >
-                      {String(children).replace(/\n$/, "")}
-                    </SyntaxHighlighter>
-                  ) : (
-                    <code className="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono">
-                      {children}
-                    </code>
-                  );
-                },
+                pre: MarkdownCodeBlock,
                 a(props) {
                   const { href, children } = props;
                   if (
@@ -170,14 +166,8 @@ export default function PostPage({ params }: PostPageProps) {
                   );
                 },
                 img(props) {
-                  const { src, alt } = props;
                   return (
-                    <img
-                      src={src}
-                      alt={alt}
-                      className="max-w-full h-auto rounded-lg my-4 mx-auto block"
-                      loading="lazy"
-                    />
+                    <PostImage {...props} preload={props.src === firstImageSrc} />
                   );
                 },
               }}
@@ -189,7 +179,7 @@ export default function PostPage({ params }: PostPageProps) {
 
         {/* Comments Section */}
         <div className="border-t border-gray-200 pt-12 mb-8">
-          <Comments />
+          <Comments key={post.slug} />
         </div>
       </div>
     </div>

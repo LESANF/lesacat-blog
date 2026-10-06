@@ -1,14 +1,5 @@
 import Link from "next/link";
-import dynamic from "next/dynamic";
-
-// 상대 경로로 import 시도
-const NotFoundAnimation = dynamic(
-  () => import("../components/ui/NotFoundAnimation"),
-  {
-    ssr: false,
-    loading: () => <div />,
-  }
-);
+import NotFoundAnimation from "@/components/ui/NotFoundAnimation";
 
 export default function NotFound() {
   return (

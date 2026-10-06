@@ -35,7 +35,7 @@ export function BlogPostStructuredData({
       url: "https://www.lesacat.me",
       logo: {
         "@type": "ImageObject",
-        url: "https://www.lesacat.me/og-image.png",
+        url: "https://www.lesacat.me/images/og-image.png",
       },
     },
     datePublished: datePublished,
@@ -59,7 +59,9 @@ export function BlogPostStructuredData({
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+      }}
     />
   );
 }
@@ -99,7 +101,9 @@ export function WebsiteStructuredData({
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+      }}
     />
   );
 }

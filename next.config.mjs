@@ -18,6 +18,10 @@ const nextConfig = {
   // 정적 파일 최적화
   poweredByHeader: false,
 
+  async redirects() {
+    return [{ source: "/sitemap-0.xml", destination: "/sitemap.xml", permanent: true }];
+  },
+
   // 실험적 기능 (일단 비활성화)
   // experimental: {
   //   optimizeCss: true,
@@ -47,4 +51,6 @@ const nextConfig = {
   },
 };
 
-export default withBundleAnalyzer(nextConfig);
+export default process.env.ANALYZE === "true"
+  ? withBundleAnalyzer(nextConfig)
+  : nextConfig;

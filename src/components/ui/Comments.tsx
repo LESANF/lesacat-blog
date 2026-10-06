@@ -6,22 +6,8 @@ export default function Comments() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!ref.current || ref.current.hasChildNodes()) return;
-
-    // 로컬 개발 환경에서는 로그만 출력
-    if (process.env.NODE_ENV === "development") {
-      console.log("Giscus - Development mode detected");
-      console.log("Current URL:", window.location.href);
-      console.log("Pathname:", window.location.pathname);
-    }
-
-    // Giscus 메시지 리스너 추가 (실시간 업데이트)
-    const handleMessage = (event: MessageEvent) => {
-      if (event.origin !== "https://giscus.app") return;
-      if (event.data.giscus?.discussion) {
-      }
-    };
-    window.addEventListener("message", handleMessage);
+    const container = ref.current;
+    if (!container) return;
 
     const scriptElem = document.createElement("script");
     scriptElem.src = "https://giscus.app/client.js";
@@ -39,12 +25,19 @@ export default function Comments() {
     scriptElem.setAttribute("data-input-position", "bottom");
     scriptElem.setAttribute("data-theme", "light");
     scriptElem.setAttribute("data-lang", "ko");
+    scriptElem.setAttribute("data-loading", "lazy");
 
-    ref.current.appendChild(scriptElem);
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        container.appendChild(scriptElem);
+        observer.disconnect();
+      }
+    }, { rootMargin: "300px" });
+    observer.observe(container);
 
-    // cleanup 함수로 이벤트 리스너 제거
     return () => {
-      window.removeEventListener("message", handleMessage);
+      observer.disconnect();
+      container.replaceChildren();
     };
   }, []);
 
@@ -61,7 +54,7 @@ export default function Comments() {
       <style jsx global>{`
         /* Giscus 컨테이너 스타일링 */
         .giscus-wrapper {
-          font-family: "GowunDodum", system-ui, sans-serif;
+          font-family: var(--font-gowun-dodum), system-ui, sans-serif;
         }
 
         .giscus-wrapper .gsc-main {
@@ -79,7 +72,7 @@ export default function Comments() {
         .giscus-wrapper .gsc-comment-box-textarea {
           background: white !important;
           border: none !important;
-          font-family: "GowunDodum", system-ui, sans-serif !important;
+          font-family: var(--font-gowun-dodum), system-ui, sans-serif !important;
           font-size: 14px !important;
           padding: 12px !important;
           line-height: 1.5 !important;
@@ -149,7 +142,7 @@ export default function Comments() {
 
         .giscus-wrapper .gsc-comment-content {
           padding: 16px !important;
-          font-family: "GowunDodum", system-ui, sans-serif !important;
+          font-family: var(--font-gowun-dodum), system-ui, sans-serif !important;
           line-height: 1.6 !important;
         }
 

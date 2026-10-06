@@ -19,7 +19,7 @@ test("feed includes every article before JavaScript runs", async () => {
 });
 
 for (const slug of slugs) {
-  test(`post ${slug} reserves image space and prioritizes its animation`, async () => {
+  test(`post ${slug} previews animations, reserves image space and prioritizes loading`, async () => {
     const response = await fetch(`${baseUrl}/posts/${slug}`);
     assert.equal(response.status, 200);
     const html = await response.text();
@@ -46,6 +46,15 @@ for (const slug of slugs) {
         : url.pathname;
       assert.ok(asset?.startsWith("/images/"));
       await access(path.join("public", decodeURIComponent(asset)));
+      const metadata = await sharp(path.join("public", decodeURIComponent(asset))).metadata();
+      if ((metadata.pages || 1) > 1) {
+        const poster = /background-image:url\(&quot;data:image\/webp;base64,([A-Za-z0-9+/=]+)&quot;\)/.exec(image);
+        assert.ok(poster, "Animations should show a first-frame preview before downloading");
+        const preview = await sharp(Buffer.from(poster[1], "base64")).metadata();
+        assert.equal(preview.pages || 1, 1);
+        assert.ok(preview.width <= 320 && preview.height <= 320);
+        assert.ok(Math.abs(preview.width / preview.height - metadata.width / metadata.height) < 0.01);
+      }
     }
     const firstSource = /\ssrc="([^"]+)"/.exec(images[0])[1];
     const animation = await fetch(new URL(firstSource, baseUrl));

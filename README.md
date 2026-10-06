@@ -31,7 +31,7 @@ pnpm validate
 
 React Doctor runs without score uploads or Socket.dev requests. Use `pnpm run doctor` explicitly: pnpm 12 also has its own built-in `doctor` command. The project script checks dependency advisories with `pnpm audit`. Neither command replaces a production build and browser checks.
 
-After adding or replacing GIFs under `public/images`, run `pnpm media:optimize` and commit the smaller animated WebP siblings with the originals. Article rendering selects these WebPs automatically; conversions that grow or change timing/dimensions are rejected. The first article image is preloaded and the rest load lazily with reserved dimensions. The body font is served locally with `font-display: swap`.
+After adding or replacing GIFs under `public/images`, run `pnpm media:optimize` and commit the smaller animated WebP siblings with the originals. Article rendering selects these WebPs automatically; conversions that grow or change timing/dimensions are rejected. The first article image is preloaded and the rest load lazily with reserved dimensions. Animated images include a small first-frame preview in the generated HTML, so their space stays visible while the animation downloads. Next Image removes the preview after decoding the animation. The body font is served locally with `font-display: swap`.
 
 The app uses Next.js 16, React 19 and Tailwind CSS 4. ESLint stays on 9 until Next's React/import/accessibility plugins support 10; TypeScript stays on 6.0 until typescript-eslint supports 7. ESLint 9 is upstream end-of-life, so check the plugin peer ranges before its next upgrade.
 

@@ -28,10 +28,16 @@ export default async function PostImage({
     imageSrc = webpSrc;
   }
 
-  const { width, height, pages = 1 } = await sharp(
-    path.join(process.cwd(), "public", decodeURIComponent(imageSrc)),
-  ).metadata();
+  const imagePath = path.join(process.cwd(), "public", decodeURIComponent(imageSrc));
+  const { width, height, pages = 1 } = await sharp(imagePath).metadata();
   if (!width || !height) throw new Error(`Missing image dimensions: ${src}`);
+
+  const placeholder = pages > 1
+    ? `data:image/webp;base64,${(await sharp(imagePath)
+        .resize({ width: 320, height: 320, fit: "inside", withoutEnlargement: true })
+        .webp({ quality: 65 })
+        .toBuffer()).toString("base64")}` as const
+    : "empty";
 
   return (
     <Image
@@ -43,6 +49,7 @@ export default async function PostImage({
       preload={preload}
       loading={preload ? undefined : "lazy"}
       unoptimized={pages > 1}
+      placeholder={placeholder}
       className="max-w-full h-auto rounded-lg my-4 mx-auto block"
       style={{ ...style, width, maxWidth: "100%", height: "auto" }}
     />
